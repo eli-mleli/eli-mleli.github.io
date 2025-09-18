@@ -1,0 +1,18 @@
+html {
+  scroll-behavior: smooth;
+}
+.tele {
+  display: flex;
+  align-items: center; /* выравнивание по вертикали */
+  gap: 10px;
+}
+
+.tele img {
+  height: 50px;
+}
+
+.tele span {
+  display: flex;
+  align-items: center; /* текст тоже ровно по середине */
+}
+

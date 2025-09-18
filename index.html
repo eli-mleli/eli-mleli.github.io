@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ели Млели — Онлайн магазин</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+    
+.evro img{
+      height: 30px;
+      position: relative; 
+  top: 10px;    /* сдвигаем вниз */
+  left: 3px;   /* можно и вбок */
+  }
+  .tele img{
+    height: 30px;
+    position: relative;
+    top: 27px;
+    left: 105px;
+  }
+
+    html { scroll-behavior: smooth; }
+  </style>
+  
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold">M&F</div>
+          <div class="hidden sm:block">
+            <h1 class="text-lg font-semibold">Ели Млели</h1>
+            <p class="text-xs text-gray-500">Свежесть. Качество. Доставка.</p>
+          </div>
+        </a>
+        <nav class="hidden md:flex gap-4 items-center">
+          <a href="#catalog" class="px-3 py-1 rounded hover:bg-gray-100">Каталог</a>
+          <a href="#fish" class="px-3 py-1 rounded hover:bg-gray-100">Рыба</a>
+          <a href="#meat" class="px-3 py-1 rounded hover:bg-gray-100">Мясо</a>
+          <a href="#contacts" class="px-3 py-1 rounded hover:bg-gray-100">Контакты</a>
+         
+<!-- Кнопка для открытия окна -->
+<button onclick="openModal()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+  Контакты
+</button>
+
+<!-- Модальное окно -->
+
+<div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div class="bg-white rounded-lg shadow-lg max-w-lg w-full h-[450px] p-8 relative text-center">
+    <h2 class="text-xl font-semibold mb-4">Свяжитесь с нами</h2>
+    <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br></p>
+
+    
+    <a href="https://t.me/Kr1stal52"><p class="tele" class="mb-2"><b><br><img src="asdfa.png">Телеграм: <span class="text-red-600">@Kr1stal52 </b><br></span></p></a> 
+    <a href="https://viber.click/+375336543217"><p class="mb-2"><b><br>📱 Вайбер: <span class="text-red-600">+375000000<br></span></p></a>
+   <a href="https://wa.me/+375336543217"> <p class="mb-2"><br>📱 WhatsApp: <span class="text-red-600">+375000000<br></span></p></a>
+</b>
+<p><br>*Если у вас остаются вопросы — напишите мне, я с радостью на них отвечу.</p>
+    <!-- Кнопка закрыть -->
+    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl leading-none">
+      ×
+    </button>
+  </div>
+</div>
+
+
+<script>
+  function openModal() {
+    document.getElementById('contactModal').classList.remove('hidden');
+  }
+  function closeModal() {
+    document.getElementById('contactModal').classList.add('hidden');
+  }
+</script>
+
+
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-red-50 to-blue-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">Свежие мясо и рыба — прямо к вашему столу</h2>
+        <p class="mt-4 text-gray-600">Выбирайте среди нашего ассортимента: от стейков и фарша до филе лосося. Честные цены и прозрачное происхождение.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#catalog" class="inline-block bg-red-600 text-white px-5 py-3 rounded-lg shadow">Перейти в каталог</a>
+          <a href="#contacts" class="inline-block bg-white border px-5 py-3 rounded-lg">Контакты</a>
+        </div>
+      </div>
+      <div class="flex-1">
+        <img src="me-at-e1557953087838.jpg" alt="Мясо и рыба" class="w-full rounded-lg shadow-md object-cover h-64 sm:h-72">
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <h3 id="catalog" class="text-2xl font-semibold mb-6">Каталог</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+      
+    </div>
+
+    <!-- Fish Section -->
+    <h3 id="fish" class="text-2xl font-semibold mt-12 mb-6">Рыба</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+    </div>
+
+    <!-- Meat Section -->
+    <h3 id="meat" class="text-2xl font-semibold mt-12 mb-6">Мясо</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+        <div class="p-4">
+          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
+          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+    </div>
+  </main>
+
+  <!-- Contacts -->
+  
+
+  <!-- Footer -->
+  <footer class="bg-white border-t py-6 text-center text-gray-500">
+    © 2025 Ели Млели. Все права защищены.
+  </footer>
+</body>
+</html>

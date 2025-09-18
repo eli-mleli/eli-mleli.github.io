@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Мясо & Рыба — Онлайн магазин</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
+  <!-- Tailwind CDN for quick prototype -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="description" content="Прототип сайта для продажи мяса и рыбы — карточки товара, корзина, фильтры и форма заказа" />
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+  <!-- Header -->
+  <header class="bg-white shadow-sm sticky top-0 z-30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold">M&F</div>
+          <div class="hidden sm:block">
+            <h1 class="text-lg font-semibold">Мясо & Рыба</h1>
+            <p class="text-xs text-gray-500">Свежесть. Качество. Доставка.</p>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex gap-4 items-center">
+          <button data-filter="all" class="filter-btn px-3 py-1 rounded hover:bg-gray-100">Все</button>
+          <button data-filter="meat" class="filter-btn px-3 py-1 rounded hover:bg-gray-100">Мясо</button>
+          <button data-filter="fish" class="filter-btn px-3 py-1 rounded hover:bg-gray-100">Рыба</button>
+          <a href="#contacts" class="px-3 py-1 rounded hover:bg-gray-100">Контакты</a>
+        </nav>
+
+        
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-red-50 to-blue-50 py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-1">
+        <h2 class="text-3xl sm:text-4xl font-extrabold">Свежие мясо и рыба — прямо к вашему столу</h2>
+        <p class="mt-4 text-gray-600">Выбирайте среди нашего ассортимента: от стейков и фарша до филе лосося. Честные цены и прозрачное происхождение.</p>
+        <div class="mt-6 flex gap-3">
+          <a href="#catalog" class="inline-block bg-red-600 text-white px-5 py-3 rounded-lg shadow">Перейти в каталог</a>
+          <a href="#contacts" class="inline-block bg-white border px-5 py-3 rounded-lg">Контакты</a>
+        </div>
+      </div>
+      <div class="flex-1">
+        <img src="me-at-e1557953087838.jpg" alt="" class="w-full rounded-lg shadow-md object-cover h-64 sm:h-72">
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10" id="catalog">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-2xl font-semibold">Каталог</h3>
+      <div class="flex items-center gap-3">
+        <label class="text-sm text-gray-600">Сортировать:</label>
+        <select id="sort" class="border rounded px-3 py-1">
+          <option value="default">По умолчанию</option>
+          <option value="price-asc">Цена: по возрастанию</option>
+          <option value="price-desc">Цена: по убыванию</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Product cards will be injected by JS -->
+    </div>
+  </main>
+
+  <!-- Cart drawer -->
+  <div id="cartDrawer" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform z-40">
+    <div class="p-4 flex items-center justify-between border-b">
+      <h4 class="text-lg font-semibold">Ваша корзина</h4>
+      <button id="closeCart" class="text-gray-600">✕</button>
+    </div>
+    <div id="cartItems" class="p-4 space-y-4 overflow-auto h-[60vh]"></div>
+    <div class="p-4 border-t">
+      <div class="flex items-center justify-between mb-4">
+        <span class="font-semibold">Итого</span>
+        <span id="cartTotal" class="font-bold">0 ₽</span>
+      </div>
+      <button id="checkoutBtn" class="w-full bg-green-600 text-white py-2 rounded">Оформить заказ</button>
+    </div>
+  </div>
+
+  <!-- Simple order modal -->
+  <div id="orderModal" class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg w-full max-w-lg p-6">
+      <h5 class="text-xl font-semibold mb-3">Оформление заказа</h5>
+      <form id="orderForm" class="space-y-3">
+        <div>
+          <label class="text-sm">Имя</label>
+          <input name="name" required class="w-full border px-3 py-2 rounded mt-1" />
+        </div>
+        <div>
+          <label class="text-sm">Телефон</label>
+          <input name="phone" required class="w-full border px-3 py-2 rounded mt-1" />
+        </div>
+        <div>
+          <label class="text-sm">Адрес доставки</label>
+          <input name="address" required class="w-full border px-3 py-2 rounded mt-1" />
+        </div>
+        <div class="flex justify-end gap-3 mt-4">
+          <button type="button" id="cancelOrder" class="px-4 py-2 rounded border">Отмена</button>
+          <button type="submit" class="px-4 py-2 rounded bg-blue-600 text-white">Подтвердить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Contacts / Footer -->
+  
+    <div class="text-center text-xs text-gray-500 py-4">© 2025 Мясо & Рыба Все права защищены.</div>
+  </footer>
+
+  <!-- Sample JS: product data, rendering, cart logic -->
+  <script>
+    // Sample product catalog (meat and fish)
+    const products = [
+      { id: 1, type: 'meat', title: 'Говяжий стейк (300 г)', price: 950, img: 'https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' },
+      { id: 2, type: 'meat', title: 'Свиная корейка (1 кг)', price: 720, img: 'https://images.unsplash.com/photo-1541558617211-0e6a8b7f4c94?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' },
+      { id: 3, type: 'meat', title: 'Фарш говяжий (500 г)', price: 420, img: 'https://images.unsplash.com/photo-1604908177522-6f7f8f31b0f6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' },
+      { id: 4, type: 'fish', title: 'Филе лосося (400 г)', price: 1200, img: 'https://images.unsplash.com/photo-1527515637463-5f68d8b2d2f4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' },
+      { id: 5, type: 'fish', title: 'Треска (1 кг)', price: 650, img: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' },
+      { id: 6, type: 'fish', title: 'Креветки свежие (500 г)', price: 890, img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder' },
+    ];
+
+ 
+
+    // Helpers
+    const ruPrice = v => v.toLocaleString('ru-RU') + ' ₽';
+
+    function renderProducts(list = products) {
+      const root = document.getElementById('products');
+      root.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-lg shadow-sm overflow-hidden';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}" class="w-full h-44 object-cover">
+          <div class="p-4">
+            <h4 class="font-semibold">${p.title}</h4>
+            <p class="text-sm text-gray-600 mt-1">${p.type === 'meat' ? 'Мясо' : 'Рыба'}</p>
+            <div class="mt-3 flex items-center justify-between">
+              <div class="text-lg font-bold">${ruPrice(p.price)}</div>
+              <button data-id="${p.id}" class="addBtn bg-red-600 text-white px-3 py-1 rounded">Добавить</button>
+            </div>
+          </div>
+        `;
+        root.appendChild(card);
+      });
+
+      // add listeners
+      document.querySelectorAll('.addBtn').forEach(b => b.addEventListener('click', e => {
+        const id = +e.currentTarget.dataset.id;
+        cart.add(id);
+        document.getElementById('cartBtn').classList.add('ring-2','ring-red-300');
+        setTimeout(()=>document.getElementById('cartBtn').classList.remove('ring-2','ring-red-300'),400);
+      }));
+    }
+
+    function renderCart() {
+      const cRoot = document.getElementById('cartItems');
+      cRoot.innerHTML = '';
+      if (cart.items.length === 0) {
+        cRoot.innerHTML = '<p class="text-sm text-gray-600">Корзина пуста. Добавьте товары.</p>';
+      } else {
+        cart.items.forEach(i => {
+          const el = document.createElement('div');
+          el.className = 'flex items-center gap-3';
+          el.innerHTML = `
+            <img src="${i.img}" alt="${i.title}" class="w-16 h-12 object-cover rounded">
+            <div class="flex-1">
+              <div class="font-medium">${i.title}</div>
+              <div class="text-sm text-gray-500">${ruPrice(i.price)} x <input type="number" min="1" value="${i.qty}" data-id="${i.id}" class="w-16 ml-2 border rounded px-2 py-1 text-sm inline-block"> </div>
+            </div>
+            <div class="text-right">
+              <div class="font-semibold">${ruPrice(i.price * i.qty)}</div>
+              <button data-id="${i.id}" class="removeBtn text-xs text-red-600 mt-2">Удалить</button>
+            </div>
+          `;
+          cRoot.appendChild(el);
+        });
+
+        // qty listeners
+        cRoot.querySelectorAll('input[type="number"]').forEach(inp => inp.addEventListener('change', e => {
+          const id = +e.target.dataset.id;
+          const val = +e.target.value || 1;
+          cart.changeQty(id, val);
+        }));
+        // remove listeners
+        cRoot.querySelectorAll('.removeBtn').forEach(b => b.addEventListener('click', e => {
+          const id = +e.currentTarget.dataset.id;
+          cart.remove(id);
+        }));
+      }
+
+      document.getElementById('cartCount').textContent = cart.items.reduce((s,i)=>s+i.qty,0);
+      document.getElementById('cartTotal').textContent = ruPrice(cart.total());
+    }
+
+    // Filters and sort
+    document.querySelectorAll('.filter-btn').forEach(b => b.addEventListener('click', e => {
+      const f = e.currentTarget.dataset.filter;
+      let list = products;
+      if (f === 'meat') list = products.filter(p=>p.type==='meat');
+      if (f === 'fish') list = products.filter(p=>p.type==='fish');
+      renderProducts(list);
+    }));
+
+    document.getElementById('sort').addEventListener('change', e => {
+      const val = e.target.value;
+      let list = [...products];
+      if (val === 'price-asc') list.sort((a,b)=>a.price-b.price);
+      if (val === 'price-desc') list.sort((a,b)=>b.price-a.price);
+      renderProducts(list);
+    });
+
+    // Cart drawer toggle
+    const cartDrawer = document.getElementById('cartDrawer');
+    document.getElementById('cartBtn').addEventListener('click', () => { cartDrawer.classList.remove('translate-x-full'); cartDrawer.classList.add('translate-x-0'); renderCart(); });
+    document.getElementById('closeCart').addEventListener('click', () => { cartDrawer.classList.remove('translate-x-0'); cartDrawer.classList.add('translate-x-full'); });
+
+    // Checkout
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.items.length === 0) { alert('Корзина пуста'); return; }
+      document.getElementById('orderModal').classList.remove('hidden');
+      document.getElementById('orderModal').classList.add('flex');
+    });
+
+    document.getElementById('cancelOrder').addEventListener('click', () => {
+      document.getElementById('orderModal').classList.add('hidden');
+      document.getElementById('orderModal').classList.remove('flex');
+    });
+
+    document.getElementById('orderForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(e.target).entries());
+      // In real app: send to server. Here — just confirm and reset
+      alert('Спасибо, ' + data.name + '! Ваш заказ принят. Сумма: ' + (cart.total()).toLocaleString('ru-RU') + ' ₽');
+      cart.items = [];
+      renderCart();
+      document.getElementById('orderModal').classList.add('hidden');
+      document.getElementById('orderModal').classList.remove('flex');
+      cartDrawer.classList.add('translate-x-full');
+    });
+
+    // subscribe simple handler
+    document.getElementById('subscribeForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Спасибо за подписку!');
+      e.target.reset();
+    });
+
+    // init
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
