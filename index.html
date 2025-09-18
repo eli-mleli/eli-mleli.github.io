@@ -28,26 +28,41 @@
 
 <body class="bg-gray-50 text-gray-800 font-sans">
   <!-- Header -->
-  <header class="bg-white shadow-sm sticky top-0 z-30">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <a href="#" class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white font-bold">M&F</div>
-          <div class="hidden sm:block">
-            <h1 class="text-lg font-semibold">Ели Млели</h1>
-            <p class="text-xs text-gray-500">Свежесть. Качество. Доставка.</p>
-          </div>
-        </a>
-        <nav class="hidden md:flex gap-4 items-center">
-          <a href="#catalog" class="px-3 py-1 rounded hover:bg-gray-100">Каталог</a>
-          <a href="#fish" class="px-3 py-1 rounded hover:bg-gray-100">Рыба</a>
-          <a href="#meat" class="px-3 py-1 rounded hover:bg-gray-100">Мясо</a>
-          <a href="#contacts" class="px-3 py-1 rounded hover:bg-gray-100">Контакты</a>
+ <header class="flex items-center justify-between p-4 bg-white shadow">
+  <!-- Лого -->
+  <div class="flex items-center space-x-2">
+    <img src="logo.png" class="h-10 w-10 rounded-full" alt="logo">
+    <span class="font-bold text-xl">Ели Млели</span>
+  </div>
+
+  <!-- Кнопки навигации (desktop) -->
+  <nav class="hidden md:flex space-x-4">
+    <a href="#catalog" class="hover:text-red-600">Каталог</a>
+    <a href="#fish" class="hover:text-red-600">Рыба</a>
+    <a href="#meat" class="hover:text-red-600">Мясо</a>
+    <a href="#contacts" onclick="openModal()" class="hover:text-red-600">Контакты</a>
+  </nav>
+
+  <!-- Гамбургер (mobile) -->
+  <button class="md:hidden text-2xl" onclick="toggleMenu()">☰</button>
+</header>
+
+<!-- Мобильное меню -->
+<div id="mobileMenu" class="hidden flex flex-col items-center bg-white shadow p-4 space-y-2 md:hidden">
+  <a href="#catalog" class="hover:text-red-600">Каталог</a>
+  <a href="#fish" class="hover:text-red-600">Рыба</a>
+  <a href="#meat" class="hover:text-red-600">Мясо</a>
+  <a href="#contacts" onclick="openModal()" class="hover:text-red-600">Контакты</a>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  }
+</script>
          
 <!-- Кнопка для открытия окна -->
-<button onclick="openModal()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-  Контакты
-</button>
+
 
 <!-- Модальное окно -->
 
@@ -114,46 +129,7 @@
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
   <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-   <!-- Кнопка для открытия окна -->
-<button onclick="openModal()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-  Контакты
-</button>
-
-<!-- Модальное окно -->
-
-<div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-<div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-8 relative text-center">
-    <h2 class="text-xl font-semibold mb-4">Свяжитесь с нами</h2>
-    <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br></p>
-
-    
-    <a href="https://t.me/Kr1stal52"><p class="tele" class="mb-2"><b><br><img src="asdfa.png">Телеграм: <span class="text-red-600">@Kr1stal52 </b><br></span></p></a> 
-    <a href="https://viber.click/+375336543217"><p class="mb-2"><b><br>📱 Вайбер: <span class="text-red-600">+375000000<br></span></p></a>
-   <a href="https://wa.me/+375336543217"> <p class="mb-2"><br>📱 WhatsApp: <span class="text-red-600">+375000000<br></span></p></a>
-</b>
-<p><br>*Если у вас остаются вопросы — напишите мне, я с радостью на них отвечу.</p>
-    <!-- Кнопка закрыть -->
-    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl leading-none">
-      ×
-    </button>
-  </div>
-</div>
-
-
-<script>
-  function openModal() {
-    document.getElementById('contactModal').classList.remove('hidden');
-  }
-  function closeModal() {
-    document.getElementById('contactModal').classList.add('hidden');
-  }
-</script>
-
-
-        </nav>
-      </div>
-    </div>
-  </header>
+    Заказать сейчас
   </button>
 </div>
           </div>
