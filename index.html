@@ -15,8 +15,7 @@
   left: 3px;   /* можно и вбок */
   }
 
-.btn{
-  position: relative;
+.btn {
   padding: 10px 20px;
   font-size: 16px;
   background: black;
@@ -26,12 +25,17 @@
   cursor: pointer;
 }
 
-  .tele img{
-    height: 42px;
-    position: relative;
-    top: 42px;
-    left: 49px;
-  }
+.tele {
+  display: flex;
+  align-items: center;   /* выравнивание по вертикали */
+  justify-content: center; /* по центру */
+  gap: 10px;             /* расстояние между иконкой и кнопкой */
+  margin-bottom: 15px;
+}
+
+.tele img {
+  height: 42px;
+}
 
     html { scroll-behavior: smooth; }
   </style>
@@ -81,10 +85,10 @@
 <div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative text-center">
     <h2 class="text-xl font-semibold mb-4">Свяжитесь с нами</h2>
-    <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br><br></p>
+    <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br><br><br></p>
 
-   <div class="tele"><a href="https://t.me/Kr1stal52"> <img src="asdfa.png"></div>
-    <a href="https://t.me/Kr1stal52"><button class="btn"><b>Телеграм: <span class="text-red-600">@Kr1stal52 </b></span><button><br></a> 
+   <div class="tele"><a href="https://t.me/Kr1stal52"> <img src="asdfa.png">
+    <a href="https://t.me/Kr1stal52"><button class="btn"><b>Телеграм: <span class="text-red-600">@Kr1stal52 </b></span><button><br></a> </div>
     <a href="https://viber.click/+375336543217"><p class="mb-2"><b><br>📱 Вайбер: <span class="text-red-600">+375000000<br></span></p></a>
    <a href="https://wa.me/+375336543217"> <p class="mb-2"><br>📱 WhatsApp: <span class="text-red-600">+375000000<br></span></p></a>
 </b>
