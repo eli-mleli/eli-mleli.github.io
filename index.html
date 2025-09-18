@@ -14,11 +14,23 @@
   top: 10px;    /* сдвигаем вниз */
   left: 3px;   /* можно и вбок */
   }
+
+.btn{
+  position: relative;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
   .tele img{
-    height: 30px;
+    height: 42px;
     position: relative;
-    top: 27px;
-    left: 105px;
+    top: 42px;
+    left: 112px;
   }
 
     html { scroll-behavior: smooth; }
@@ -49,7 +61,7 @@
 
 <!-- Мобильное меню -->
 <div id="mobileMenu" class="hidden flex flex-col items-center bg-white shadow p-4 space-y-2 md:hidden">
-  <a href="#catalog" class="hover:text-red-600">Каталог</a>
+  <a href="#catalog" class="hover:text-red-600"><b>Каталог</b></a>
   <a href="#fish" class="hover:text-red-600">Рыба</a>
   <a href="#meat" class="hover:text-red-600">Мясо</a>
   <a href="#contacts" onclick="openModal()" class="hover:text-red-600">Контакты</a>
@@ -67,16 +79,16 @@
 <!-- Модальное окно -->
 
 <div id="contactModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-<div class="bg-white rounded-lg shadow-lg max-w-lg w-full h-[450px] p-8 relative text-center">
+<div class="bg-white rounded-lg shadow-lg max-w-xl w-full p-6 relative text-center">
     <h2 class="text-xl font-semibold mb-4">Свяжитесь с нами</h2>
-    <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br></p>
+    <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br><br></p>
 
-    
-    <a href="https://t.me/Kr1stal52"><p class="tele" class="mb-2"><b><br><img src="asdfa.png">Телеграм: <span class="text-red-600">@Kr1stal52 </b><br></span></p></a> 
+   <div class="tele"><a href="https://t.me/Kr1stal52"> <img src="asdfa.png"></div>
+    <a href="https://t.me/Kr1stal52"><button class="btn"><b>Телеграм: <span class="text-red-600">@Kr1stal52 </b></span><button><br></a> 
     <a href="https://viber.click/+375336543217"><p class="mb-2"><b><br>📱 Вайбер: <span class="text-red-600">+375000000<br></span></p></a>
    <a href="https://wa.me/+375336543217"> <p class="mb-2"><br>📱 WhatsApp: <span class="text-red-600">+375000000<br></span></p></a>
 </b>
-<p><br>*Если у вас остаются вопросы — напишите мне, я с радостью на них отвечу.</p>
+<p><br><br>*Если у вас остаются вопросы — напишите мне, я с радостью на них отвечу.</p>
     <!-- Кнопка закрыть -->
     <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl leading-none">
       ×
