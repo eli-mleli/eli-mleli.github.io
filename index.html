@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ели Млели — Онлайн магазин</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+function nextSlide(btn) {
+  const slider = btn.parentElement.querySelector('.slider');
+  const slides = slider.children.length;
+  const slideWidth = slider.children[0].offsetWidth;
+  
+  let current = parseInt(slider.getAttribute('data-current') || 0);
+  current = (current + 1) % slides;
+  
+  slider.style.transform = `translateX(-${current * slideWidth}px)`;
+  slider.setAttribute('data-current', current);
+}
+
+function prevSlide(btn) {
+  const slider = btn.parentElement.querySelector('.slider');
+  const slides = slider.children.length;
+  const slideWidth = slider.children[0].offsetWidth;
+  
+  let current = parseInt(slider.getAttribute('data-current') || 0);
+  current = (current - 1 + slides) % slides;
+  
+  slider.style.transform = `translateX(-${current * slideWidth}px)`;
+  slider.setAttribute('data-current', current);
+}
+</script>
   <style>
 
     
@@ -34,9 +60,32 @@
 }
 
 .tele img {
-  height: 42px;
+  height: 40px;
 }
 
+.viber{
+  display: flex;
+  align-items: center;   /* выравнивание по вертикали */
+  justify-content: center; /* по центру */
+  gap: 15px;             /* расстояние между иконкой и кнопкой */
+  margin-bottom: 0px;
+}
+
+.viber img {
+  height: 40px;
+}
+
+.wa{
+  display: flex;
+  align-items: center;   /* выравнивание по вертикали */
+  justify-content: center; /* по центру */
+  gap: 15px;             /* расстояние между иконкой и кнопкой */
+  margin-bottom: 0px;
+}
+
+.wa img {
+  height: 40px;
+}
     html { scroll-behavior: smooth; }
   </style>
   
@@ -87,10 +136,16 @@
     <h2 class="text-xl font-semibold mb-4">Свяжитесь с нами</h2>
     <p>Чтобы оформить заказ, свяжитесь со мной в удобном для вас мессенджере.<br><br><br></p>
 
-   <div class="tele"><a href="https://t.me/Kr1stal52"> <img src="asdfa.png">
-    <a href="https://t.me/Kr1stal52"><button class="btn"><b>Телеграм: <span class="text-red-600">@Kr1stal52 </b></span><button><br></a> </div>
-    <a href="https://viber.click/+375336543217"><p class="mb-2"><b><br>📱 Вайбер: <span class="text-red-600">+375000000<br></span></p></a>
-   <a href="https://wa.me/+375336543217"> <p class="mb-2"><br>📱 WhatsApp: <span class="text-red-600">+375000000<br></span></p></a>
+   <div class="tele"><a href="https://t.me/Kr1stal52" target="_blank" rel="noopener noreferrer"> <img src="asdfa.png">
+    <a href="https://t.me/Kr1stal52" target="_blank" rel="noopener noreferrer"><button class="btn"><b> Telegram: <span class="text-red-600">@Kr1stal52 </b></span><button><br></a> </div>
+   
+    <div class="viber"><a href="https://viber.click/+375336543217" target="_blank" rel="noopener noreferrer"> <img src="viber.png">
+   <a href="https://viber.click/+375336543217" target="_blank" rel="noopener noreferrer"><button class="btn"><b>Viber: <span class="text-red-600">+375000000</b></span><button></a> </div>
+ 
+    <br><div class="wa"><a href="https://wa.me/+375336543217" target="_blank" rel="noopener noreferrer"> <img src="wa.png">
+   <a href="https://wa.me/+375336543217" target="_blank" rel="noopener noreferrer"><button class="btn"><b>WhatsApp: <span class="text-red-600">+375000000</b></span><button><br></a> </div>
+ 
+     
 </b>
 <p><br><br>*Если у вас остаются вопросы — напишите мне, я с радостью на них отвечу.</p>
     <!-- Кнопка закрыть -->
@@ -124,7 +179,7 @@
         <p class="mt-4 text-gray-600">Выбирайте среди нашего ассортимента: от стейков и фарша до филе лосося. Честные цены и прозрачное происхождение.</p>
         <div class="mt-6 flex gap-3">
           <a href="#catalog" class="inline-block bg-red-600 text-white px-5 py-3 rounded-lg shadow">Перейти в каталог</a>
-          <a href="#contacts" class="inline-block bg-white border px-5 py-3 rounded-lg">Контакты</a>
+          <a href="#contacts" onclick="openModal()" class="inline-block bg-white border px-5 py-3 rounded-lg">Контакты</a>
         </div>
       </div>
       <div class="flex-1">
@@ -138,13 +193,23 @@
     <h3 id="catalog" class="text-2xl font-semibold mb-6">Каталог</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+         <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="riiiba.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="riba1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="riba2.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Рыба жерех холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Рыба жерех премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -152,13 +217,24 @@
         
       </article>
       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+         <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="shiips1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chiips2.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chiips3.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chiips4.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Мясные чипсы (1 КГ)</h4>
+          <p class="text-gray-600">Мясные чипсы премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -166,13 +242,23 @@
         
       </article>
        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+       <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="riuba.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="riuba1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="ruiba2.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Рыба жерех холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Рыба жерех премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -180,13 +266,23 @@
         
       </article>
        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="pal.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="pal1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="pal1.1.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Полендвица холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Полендвица премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -194,13 +290,22 @@
         
       </article>
        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="chips2.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Мясные чипсы (1 КГ)</h4>
+          <p class="text-gray-600">Мясные чипсы премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -208,61 +313,210 @@
         
       </article>
        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="kal.png" class="w-full h-44 object-cover flex-shrink-0">
+      
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Кабаносы (1 КГ)</h4>
+          <p class="text-gray-600">Кабаносы премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
           </div>
         
       </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="chips3.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chips3.1.png" class="w-full h-44 object-cover flex-shrink-0">
+      
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+        <div class="p-4">
+          <h4 class="font-semibold">Мясные чипсы (1 КГ)</h4>
+          <p class="text-gray-600">Мясные чипсы премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="pal2.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+        <div class="p-4">
+          <h4 class="font-semibold">Полендвица холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Полендвица премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+
+
+
+
+
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <!-- Контейнер для слайдера -->
+  <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="svin.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="svin2.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+
+  <!-- Описание товара -->
+  <div class="p-4">
+    <h4 class="font-semibold">Свиной бочок (1 КГ)</h4>
+    <p class="text-gray-600">Свиной бочок премиум качества.</p>
+    <div class="mt-3 flex items-center justify-between">
+      <p class="font-bold text-lg">100 BYN</p>
+      <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+        Заказать сейчас
+      </button>
+    </div>
+  </div>
+</article>
+
+
+ <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <!-- Контейнер для слайдера -->
+  <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="kall.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="kall1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="kall2.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+
+  <!-- Описание товара -->
+  <div class="p-4">
+    <h4 class="font-semibold">Краковская колбаса (1 КГ)</h4>
+    <p class="text-gray-600">Краковская колбаса премиум качества.</p>
+    <div class="mt-3 flex items-center justify-between">
+      <p class="font-bold text-lg">100 BYN</p>
+      <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+        Заказать сейчас
+      </button>
+    </div>
+  </div>
+</article>
+      
+
+ <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <!-- Контейнер для слайдера -->
+  <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="mat.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+
+  <!-- Описание товара -->
+  <div class="p-4">
+    <h4 class="font-semibold">Матвей Костюк (≈65 КГ)</h4>
+    <p class="text-gray-600"><b>ПРИЧИНА ПРОДАЖИ:</b> опять сожрал весь холодильник.</p>
+    <div class="mt-3 flex items-center justify-between">
+      <p class="font-bold text-lg">1 BYN</p>
+      <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+        Заказать сейчас
+      </button>
+    </div>
+  </div>
+</article>
       
     </div>
 
     <!-- Fish Section -->
     <h3 id="fish" class="text-2xl font-semibold mt-12 mb-6">Рыба</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
-        <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
-          <div class="mt-3 flex items-center justify-between">
-  <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-    Заказать сейчас
-  </button>
-</div>
-          </div>
-        
-      </article>
-      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
-        <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
-          <div class="mt-3 flex items-center justify-between">
-  <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
-    Заказать сейчас
-  </button>
-</div>
-          </div>
-        
-      </article>
        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+         <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="riiiba.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="riba1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="riba2.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Рыба жерех холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Рыба жерех премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+     
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+       <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="riuba.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="riuba1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="ruiba2.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+        <div class="p-4">
+          <h4 class="font-semibold">Рыба жерех холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Рыба жерех премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -275,27 +529,48 @@
     <h3 id="meat" class="text-2xl font-semibold mt-12 mb-6">Мясо</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+         <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="shiips1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chiips2.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chiips3.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chiips4.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Мясные чипсы (1 КГ)</h4>
+          <p class="text-gray-600">Мясные чипсы премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
           </div>
         
       </article>
-      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+     <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="pal.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="pal1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="pal1.1.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Полендвица холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Полендвица премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
@@ -303,19 +578,155 @@
         
       </article>
        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=800&auto=format&fit=crop" alt="Говяжий стейк" class="w-full h-44 object-cover">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="chips2.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
         <div class="p-4">
-          <h4 class="font-semibold">Говяжий стейк (1 КГ)</h4>
-          <p class="text-gray-600">Свежий стейк премиум качества.</p>
+          <h4 class="font-semibold">Мясные чипсы (1 КГ)</h4>
+          <p class="text-gray-600">Мясные чипсы премиум качества.</p>
           <div class="mt-3 flex items-center justify-between">
   <p class="font-bold text-lg">100 BYN</p>
-  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
     Заказать сейчас
   </button>
 </div>
           </div>
         
       </article>
+
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="kal.png" class="w-full h-44 object-cover flex-shrink-0">
+      
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+        <div class="p-4">
+          <h4 class="font-semibold">Кабаносы (1 КГ)</h4>
+          <p class="text-gray-600">Кабаносы премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+
+        <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="chips3.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="chips3.1.png" class="w-full h-44 object-cover flex-shrink-0">
+      
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+        <div class="p-4">
+          <h4 class="font-semibold">Мясные чипсы (1 КГ)</h4>
+          <p class="text-gray-600">Мясные чипсы премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+
+       <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="pal2.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+        <div class="p-4">
+          <h4 class="font-semibold">Полендвица холодного/горячего копчения (1 КГ)</h4>
+          <p class="text-gray-600">Полендвица премиум качества.</p>
+          <div class="mt-3 flex items-center justify-between">
+  <p class="font-bold text-lg">100 BYN</p>
+  <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+    Заказать сейчас
+  </button>
+</div>
+          </div>
+        
+      </article>
+
+      <article class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <!-- Контейнер для слайдера -->
+  <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="svin.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="svin2.png" class="w-full h-44 object-cover flex-shrink-0">
+     
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+
+  <!-- Описание товара -->
+  <div class="p-4">
+    <h4 class="font-semibold">Свиной бочок (1 КГ)</h4>
+    <p class="text-gray-600">Свиной бочок премиум качества.</p>
+    <div class="mt-3 flex items-center justify-between">
+      <p class="font-bold text-lg">100 BYN</p>
+      <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+        Заказать сейчас
+      </button>
+    </div>
+  </div>
+</article>
+
+<article class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <!-- Контейнер для слайдера -->
+  <div class="relative w-full h-44 overflow-hidden">
+    <div class="slider flex transition-transform duration-500" style="transform: translateX(0%);">
+      <img src="kall.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="kall1.png" class="w-full h-44 object-cover flex-shrink-0">
+      <img src="kall2.png" class="w-full h-44 object-cover flex-shrink-0">
+    </div>
+
+    <!-- Кнопки навигации -->
+    <button onclick="prevSlide(this)" class="absolute top-1/2 left-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">‹</button>
+    <button onclick="nextSlide(this)" class="absolute top-1/2 right-2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded">›</button>
+  </div>
+
+  <!-- Описание товара -->
+  <div class="p-4">
+    <h4 class="font-semibold">Краковская колбаса (1 КГ)</h4>
+    <p class="text-gray-600">Краковская колбаса премиум качества.</p>
+    <div class="mt-3 flex items-center justify-between">
+      <p class="font-bold text-lg">100 BYN</p>
+      <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" onclick="openModal()">
+        Заказать сейчас
+      </button>
+    </div>
+  </div>
+</article>
     </div>
   </main>
 
